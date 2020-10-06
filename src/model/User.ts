@@ -1,4 +1,4 @@
-export class User{
+export class User {
   constructor(
     private id: string,
     private username: string,
@@ -9,11 +9,11 @@ export class User{
   ){}
 
   getId(){
-    return this.id;
+    return this.id
   }
 
   getUsername(){
-    return this.username;
+    return this.username
   }
 
   getName(){
@@ -21,39 +21,39 @@ export class User{
   }
 
   getEmail(){
-      return this.email;
+      return this.email
   }
 
   getPassword(){
-      return this.password;
+      return this.password
   }
 
   getRole(){
-      return this.role;
+      return this.role
   }
 
   setId(id: string){
-      this.id = id;
+      this.id = id
   }
 
   setUsername(username: string){
-    this.username = username;
+    this.username = username
   }
 
   setName(name: string){
-      this.name = name;
+      this.name = name
   }
 
   setEmail(email: string){
-      this.email = email;
+      this.email = email
   }
 
   setPassword(password: string){
-      this.password = password;
+      this.password = password
   }
 
   setRole(role: UserRole){
-      this.role = role;
+      this.role = role
   }
 
   static stringToUserRole(input: string): UserRole{
@@ -72,12 +72,18 @@ export class User{
     }
 }
 
-export interface UserInputDTO{
+export interface UserInputDTO {
   username: string;
   name: string;
   email: string;
   password: string;
   role: string;
+}
+
+export interface LoginInputDTO {
+  email: string;
+  username: string;
+  password: string;
 }
 
 export enum UserRole{

@@ -1,5 +1,6 @@
+import { Hash } from "crypto";
 import { UserDatabase } from "../data/UserDatabase";
-import { UserInputDTO, UserRole } from "../model/User";
+import { LoginInputDTO, UserInputDTO, UserRole } from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
@@ -29,11 +30,39 @@ export class UserBusiness {
     const hashPassword = await hashManager.hash(user.password);
 
     const userDatabase = new UserDatabase();
-    await userDatabase.createUser(id, user.username, user.email, user.name, hashPassword, user.role);
+    await userDatabase.createUser(id, user.username, user.name, user.email, hashPassword, user.role);
 
     const authenticator = new Authenticator();
     const accessToken = authenticator.generateToken({ id, role: user.role });
 
     return accessToken;
+  }
+
+  async getUserByEmailorUsername(user: LoginInputDTO) {
+    if (!user.email && !user.username) {
+      throw new Error('Por favor informe seu email ou username para logar')
+    }
+
+    const userDatabase = new UserDatabase()
+    const userFromDB = await userDatabase.getUserByEmailorUsername(user.email, user.username)
+
+    const hashManager = new HashManager()
+    const hashCompare = await hashManager.compare(user.password, userFromDB.getPassword())
+
+    const authenticator = new Authenticator()
+    const accessToken = authenticator.generateToken({id: userFromDB.getId(), role: userFromDB.getRole()})
+
+    if (!hashCompare) {
+      throw new Error('Por favor insira uma senha válida para logar')
+    }
+
+    return accessToken
+  }
+
+  async getName(user: LoginInputDTO) {
+    const userDatabase = new UserDatabase()
+    const userFromDB = await userDatabase.getUserByEmailorUsername(user.email, user.username)
+
+    return userFromDB.getName()
   }
 }
