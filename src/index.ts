@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import { AddressInfo } from 'net'
 import { userRouter } from './routes/userRouter'
+import { imageRouter } from './routes/imageRouter'
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/user', userRouter)
+app.use('/image', imageRouter)
 
 const server = app.listen(3000, () => {
   if (server) {
