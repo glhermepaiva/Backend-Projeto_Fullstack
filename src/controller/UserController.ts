@@ -38,6 +38,9 @@ export class UserController {
 
       res.status(200).send({message: `Usuário logado com sucesso! Bem vindo(a) de volta, ${name}.`, token})
     } catch (error) {
+      if(error.message.includes("undefined")){
+        res.status(400).send({message: "Por favor confira se seu email ou nome de usuário estão corretos"})
+    }
       res.status(400).send({error: error.message})
     } finally {
       BaseDatabase.destroyConnection()

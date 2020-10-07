@@ -1,3 +1,4 @@
+import { Image } from "../model/Image";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class ImageDatabase extends BaseDatabase {
@@ -22,5 +23,25 @@ export class ImageDatabase extends BaseDatabase {
       } catch (error) {
         throw new Error(error.sqlMessage || error.message)
       }
+    }
+
+    public async getUserImages(user: string): Promise<any> {
+      const result = await this.getConnection()
+      .raw(`
+            SELECT * FROM ${ImageDatabase.TABLE_NAME}
+            JOIN Flickenu_Usuarios on ${ImageDatabase.TABLE_NAME}.user_id = Flickenu_Usuarios.id
+            WHERE username = "${user}"
+            ORDER BY ${ImageDatabase.TABLE_NAME}.date DESC
+      `)
+      return result[0]
+    }
+
+    public async getImageDetails(id: string): Promise<any> {
+      const result = await this.getConnection()
+      .raw(`
+            SELECT * FROM ${ImageDatabase.TABLE_NAME}
+            WHERE ID = "${id}"
+      `)
+      return result[0]
     }
 }
