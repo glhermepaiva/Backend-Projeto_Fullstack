@@ -26,4 +26,58 @@ export class ImageController {
       BaseDatabase.destroyConnection()
     }
   }
+
+  async userGallery(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization as string
+      const user = req.params.username as string
+
+      const imageBusiness = new ImageBusiness()
+      const images = await imageBusiness.getUserImages(token, user)
+
+      res.status(200).send({
+        gallery: images.map((image: any) => {
+          return {
+            subtitle: image.subtitle,
+            author: image.author,
+            date: image.date,
+            file: image.file,
+            tags: image.tags,
+            collection: image.collection
+          }
+        }) 
+      })
+    } catch (error) {
+      res.status(400).send({error: error.message})
+    } finally {
+      BaseDatabase.destroyConnection()
+    }
+  }
+
+  async imageDetails(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization as string
+      const id = req.params.id
+
+      const imageBusiness = new ImageBusiness()
+      const details = await imageBusiness.getImageDetails(token, id)
+
+      res.status(200).send({
+        image: details.map((info: any) => {
+          return {
+            subtitle: info.subtitle,
+            author: info.author,
+            date: info.date,
+            file: info.file,
+            tags: info.tags,
+            collection: info.collection
+          }
+        })
+      })
+    } catch (error) {
+      res.status(400).send({error: error.message})
+    } finally {
+      BaseDatabase.destroyConnection()
+    }
+  }
 }
