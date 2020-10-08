@@ -3,12 +3,14 @@ import dotenv from 'dotenv'
 import { AddressInfo } from 'net'
 import { userRouter } from './routes/userRouter'
 import { imageRouter } from './routes/imageRouter'
+import cors from "cors"
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors({ origin: true }));
 
 app.use('/user', userRouter)
 app.use('/image', imageRouter)
