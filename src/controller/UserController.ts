@@ -36,7 +36,7 @@ export class UserController {
       const token = await userBusiness.getUserByEmailorUsername(input)
       const name = await userBusiness.getName(input)
 
-      res.status(200).send({message: `Usuário logado com sucesso! Bem vindo(a) de volta, ${name}.`, token})
+      res.status(200).send({token, name})
     } catch (error) {
       if(error.message.includes("undefined")){
         res.status(400).send({message: "Por favor confira se seu email ou nome de usuário estão corretos"})
