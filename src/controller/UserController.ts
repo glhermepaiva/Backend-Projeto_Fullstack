@@ -16,7 +16,7 @@ export class UserController {
       const userBusiness = new UserBusiness()
       const token = await userBusiness.createUser(input)
 
-      res.status(200).send({message: `Usuário cadastrado com sucesso! Seja bem vindo(a) ao Flickenu, ${req.body.name}.`, token})
+      res.status(200).send({token, name})
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {
