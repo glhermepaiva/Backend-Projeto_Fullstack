@@ -15,9 +15,9 @@ export class UserController {
       }
       const userBusiness = new UserBusiness()
       const token = await userBusiness.createUser(input)
-      const name = await userBusiness.getName(input)
+      const infos = await userBusiness.getInfos(input)
 
-      res.status(200).send({token, name})
+      res.status(200).send({token, infos})
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {
@@ -37,16 +37,7 @@ export class UserController {
       const token = await userBusiness.getUserByEmailorUsername(input)
       const infos = await userBusiness.getInfos(input)
 
-      res.status(200).send({token, 
-        userdata: infos.map((info: any) => {
-          return {
-            username: info.username,
-            name: info.name,
-            email: info.email,
-            role: info.role
-          }
-        })
-      })
+      res.status(200).send({token, infos})
     } catch (error) {
       if(error.message.includes("undefined")){
         res.status(400).send({message: "Por favor confira se seu email ou nome de usuário estão corretos"})

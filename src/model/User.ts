@@ -1,7 +1,4 @@
 export class User {
-  map(arg0: (info: any) => { username: any; name: any; email: any; role: any }) {
-    throw new Error('Method not implemented.')
-  }
   constructor(
     private id: string,
     private username: string,

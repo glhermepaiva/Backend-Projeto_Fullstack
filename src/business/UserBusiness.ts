@@ -6,9 +6,6 @@ import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 
 export class UserBusiness {
-  getName(input: UserInputDTO) {
-    throw new Error('Method not implemented.');
-  }
   async createUser(user: UserInputDTO) {
     if (!user.username || !user.name || !user.email || !user.password || !user.role){
       throw new Error("Por favor informe todos os dados")
@@ -65,8 +62,6 @@ export class UserBusiness {
   async getInfos(user: LoginInputDTO) {
     const userDatabase = new UserDatabase()
     const userFromDB = await userDatabase.getUserByEmailorUsername(user.email, user.username)
-
-    console.log(userFromDB)
     return userFromDB
   }
 }
