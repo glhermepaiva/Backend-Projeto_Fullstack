@@ -1,4 +1,3 @@
-import { Image } from "../model/Image";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class ImageDatabase extends BaseDatabase {
