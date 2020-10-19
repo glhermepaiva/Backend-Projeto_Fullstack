@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ImageBusiness } from '../business/ImageBusiness';
 import { BaseDatabase } from "../data/BaseDatabase";
-import { ImageInputDTO } from '../model/Image';
+import { ImageInputDTO, ProfileImageInputDTO } from '../model/Image';
 
 export class ImageController {
   async add(req: Request, res: Response) {
@@ -74,6 +74,40 @@ export class ImageController {
           }
         })
       })
+    } catch (error) {
+      res.status(400).send({error: error.message})
+    } finally {
+      BaseDatabase.destroyConnection()
+    }
+  }
+
+  async addProfilePicture(req: Request, res: Response) {
+    try {
+      const input: ProfileImageInputDTO = {
+        file: req.body.file,
+      }
+      const token = req.headers.authorization as string
+
+      const imageBusiness = new ImageBusiness()
+      await imageBusiness.addProfileImage(input, token)
+
+      res.status(200).send({message: `Imagem de perfil cadastrada com sucesso!`})
+    } catch (error) {
+      res.status(400).send({error: error.message})
+    } finally {
+      BaseDatabase.destroyConnection()
+    }
+  }
+
+  async profilePicture(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization as string
+      const user = req.params.username as string
+
+      const imageBusiness = new ImageBusiness()
+      const profilePicture = await imageBusiness.getProfilePicture(token, user)
+
+      res.status(200).send({profilePicture})
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {

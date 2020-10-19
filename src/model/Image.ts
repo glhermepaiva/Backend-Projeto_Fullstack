@@ -88,3 +88,6 @@ export interface ImageInputDTO {
   collection: string  
 }
 
+export interface ProfileImageInputDTO {
+  file: string
+}
