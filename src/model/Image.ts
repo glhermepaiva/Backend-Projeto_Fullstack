@@ -87,7 +87,3 @@ export interface ImageInputDTO {
   tags: string[],
   collection: string  
 }
-
-export interface ProfileImageInputDTO {
-  file: string
-}

@@ -1,5 +1,5 @@
 import { ImageDatabase } from "../data/ImageDatabase";
-import { ImageInputDTO, ProfileImageInputDTO } from "../model/Image";
+import { ImageInputDTO} from "../model/Image";
 import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/IdGenerator";
 
@@ -47,9 +47,9 @@ export class ImageBusiness {
     return details
   }
 
-  async addProfileImage(image: ProfileImageInputDTO, token: string) {
-    if (!image.file){
-      throw new Error("Por favor insira o endereço da sua imagem de perfil")
+  async addProfileImage(image: string, token: string) {
+    if (!image){
+      throw new Error("Por favor insira o endereço da sua nova imagem de perfil")
     }
 
     const authenticator = new Authenticator()
@@ -59,7 +59,8 @@ export class ImageBusiness {
     const id = idGenerator.generate()
 
     const imageDatabase = new ImageDatabase()
-    await imageDatabase.addProfileImage(id, image.file, authData.id)
+    await imageDatabase.deleteProfilePicture(authData.id)
+    await imageDatabase.addProfileImage(id, image, authData.id)
   }
 
   async getProfilePicture(token: string, user: string) {

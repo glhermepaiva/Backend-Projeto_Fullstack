@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { ImageBusiness } from '../business/ImageBusiness';
 import { BaseDatabase } from "../data/BaseDatabase";
-import { ImageInputDTO, ProfileImageInputDTO } from '../model/Image';
+import { ImageInputDTO } from '../model/Image';
 
 export class ImageController {
   async add(req: Request, res: Response) {
@@ -83,15 +83,14 @@ export class ImageController {
 
   async addProfilePicture(req: Request, res: Response) {
     try {
-      const input: ProfileImageInputDTO = {
-        file: req.body.file,
-      }
+      const file = req.body.file as string
+
       const token = req.headers.authorization as string
 
       const imageBusiness = new ImageBusiness()
-      await imageBusiness.addProfileImage(input, token)
+      await imageBusiness.addProfileImage(file, token)
 
-      res.status(200).send({message: `Imagem de perfil cadastrada com sucesso!`})
+      res.status(200).send({message: `Imagem de perfil atualizada com sucesso!`})
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {

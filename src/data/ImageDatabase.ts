@@ -70,4 +70,12 @@ export class ImageDatabase extends BaseDatabase {
     `)
     return result[0][0].file
   }
+
+  public async deleteProfilePicture(userId: string): Promise<any> {
+    await this.getConnection()
+    .raw(`
+         DELETE FROM ${ImageDatabase.PROFILE_PICTURE_TABLE}
+         WHERE user_id = "${userId}"
+    `)
+  }
 }
