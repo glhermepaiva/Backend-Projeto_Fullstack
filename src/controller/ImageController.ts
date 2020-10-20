@@ -65,6 +65,7 @@ export class ImageController {
       res.status(200).send({
         image: details.map((info: any) => {
           return {
+            id: info.id,
             subtitle: info.subtitle,
             author: info.author,
             date: info.date,
