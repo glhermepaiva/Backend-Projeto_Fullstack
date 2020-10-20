@@ -44,6 +44,8 @@ export class ImageBusiness {
     const imageDatabase = new ImageDatabase()
     const details = await imageDatabase.getImageDetails(id)
 
+    console.log(details)
+
     return details
   }
 
