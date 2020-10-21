@@ -25,14 +25,13 @@ export class ImageDatabase extends BaseDatabase {
       }
   }
 
-  public async getUserImages(user: string): Promise<any> {
+  public async getPersonalImages(user: string): Promise<any> {
     const result = await this.getConnection()
     .raw(`
           SELECT * FROM ${ImageDatabase.TABLE_NAME}
-          WHERE username = "${user}"
+          WHERE user_id = "${user}"
           ORDER BY ${ImageDatabase.TABLE_NAME}.date DESC
     `)
-    console.log(result[0])
     return result[0]
   }
 

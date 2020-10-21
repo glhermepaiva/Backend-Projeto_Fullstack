@@ -19,16 +19,13 @@ export class ImageBusiness {
     await imageDatabase.addImage(newId, image.subtitle, image.author, image.date, image.file, image.tags, image.collection, authData.id)
   }
 
-  async getUserImages(token: string, user: string) {
+  async getPersonalImages(token: string) {
+    
     const authenticator = new Authenticator()
     const authData = authenticator.getData(token)
 
-    if(!user) {
-      throw new Error("Por favor informe um usuário para ver suas fotos")
-    }
-
     const imageDatabase = new ImageDatabase()
-    const images = await imageDatabase.getUserImages(authData.id)
+    const images = await imageDatabase.getPersonalImages(authData.id)
 
     return images
   }

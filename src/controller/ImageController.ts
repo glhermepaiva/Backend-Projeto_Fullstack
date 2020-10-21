@@ -27,13 +27,12 @@ export class ImageController {
     }
   }
 
-  async userGallery(req: Request, res: Response) {
+  async personalGallery(req: Request, res: Response) {
     try {
       const token = req.headers.authorization as string
-      const user = req.params.username as string
 
       const imageBusiness = new ImageBusiness()
-      const images = await imageBusiness.getUserImages(token, user)
+      const images = await imageBusiness.getPersonalImages(token)
 
       res.status(200).send({
         gallery: images.map((image: any) => {
