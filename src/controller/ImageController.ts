@@ -57,7 +57,7 @@ export class ImageController {
   async imageDetails(req: Request, res: Response) {
     try {
       const token = req.headers.authorization as string
-      const id = req.params.id
+      const id = req.params.id as string
 
       const imageBusiness = new ImageBusiness()
       const details = await imageBusiness.getImageDetails(token, id)

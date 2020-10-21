@@ -10,7 +10,15 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+      credentials: true,
+      origin: [
+          'http://localhost:3000',
+          'https://flickenu.herokuapp.com'
+      ]
+  }),
+)
 
 app.use('/user', userRouter)
 app.use('/image', imageRouter)

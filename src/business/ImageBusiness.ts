@@ -20,7 +20,6 @@ export class ImageBusiness {
   }
 
   async getPersonalImages(token: string) {
-    
     const authenticator = new Authenticator()
     const authData = authenticator.getData(token)
 
@@ -31,13 +30,13 @@ export class ImageBusiness {
   }
 
   async getImageDetails(token: string, id: string) {
-    const authenticator = new Authenticator()
-    authenticator.getData(token)
-
     if (!id) {
       throw new Error("Por favor informe o id de uma imagem para ver seus detalhes")
     }
-
+    
+    const authenticator = new Authenticator()
+    authenticator.getData(token)
+    
     const imageDatabase = new ImageDatabase()
     const details = await imageDatabase.getImageDetails(id)
 
