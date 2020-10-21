@@ -29,10 +29,10 @@ export class ImageDatabase extends BaseDatabase {
     const result = await this.getConnection()
     .raw(`
           SELECT * FROM ${ImageDatabase.TABLE_NAME}
-          JOIN Flickenu_Usuarios on ${ImageDatabase.TABLE_NAME}.user_id = Flickenu_Usuarios.id
           WHERE username = "${user}"
           ORDER BY ${ImageDatabase.TABLE_NAME}.date DESC
     `)
+    console.log(result[0])
     return result[0]
   }
 
