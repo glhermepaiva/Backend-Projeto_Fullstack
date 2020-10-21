@@ -62,8 +62,8 @@ export class ImageController {
       const imageBusiness = new ImageBusiness()
       const details = await imageBusiness.getImageDetails(token, id)
 
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
       res.status(200).send({
         image: details.map((info: any) => {
           return {
