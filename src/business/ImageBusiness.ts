@@ -29,20 +29,6 @@ export class ImageBusiness {
     return images
   }
 
-  async getImageDetails(token: string, id: string) {
-    const authenticator = new Authenticator()
-    authenticator.getData(token)
-    
-    if (!id) {
-      throw new Error("Por favor informe o id de uma imagem para ver seus detalhes")
-    }
-    
-    const imageDatabase = new ImageDatabase()
-    const details = await imageDatabase.getImageDetails(id)
-
-    return details
-  }
-
   async addProfileImage(image: string, token: string) {
     if (!image){
       throw new Error("Por favor insira o endereço da sua nova imagem de perfil")

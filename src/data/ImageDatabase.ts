@@ -35,15 +35,6 @@ export class ImageDatabase extends BaseDatabase {
     return result[0]
   }
 
-  public async getImageDetails(id: string): Promise<any> {
-    const result = await this.getConnection()
-    .raw(`
-          SELECT * FROM ${ImageDatabase.TABLE_NAME}
-          WHERE id = "${id}"
-    `)
-    return result[0][0]
-  }
-
   public async addProfileImage(
     id: string,
     file: string,

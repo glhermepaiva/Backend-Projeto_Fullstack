@@ -54,22 +54,6 @@ export class ImageController {
     }
   }
 
-  async imageDetails(req: Request, res: Response) {
-    try {
-      const token = req.headers.authorization as string
-      const id = req.params.id as string
-
-      const imageBusiness = new ImageBusiness()
-      const details = await imageBusiness.getImageDetails(token, id)
-
-      res.status(200).send({details})
-    } catch (error) {
-      res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
-    }
-  }
-
   async addProfilePicture(req: Request, res: Response) {
     try {
       const file = req.body.file as string

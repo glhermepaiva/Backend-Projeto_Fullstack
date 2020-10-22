@@ -9,10 +9,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRouter)
@@ -24,14 +21,5 @@ const server = app.listen(process.env.PORT, () => {
       console.log(`Server is running in http://localhost: ${address.port}`);
   } else {
       console.error(`Failure upon starting server.`);
-  }
-});
-
-app.get("/teste", async (req: Request, res: Response) => {
-
-  try {
-      res.status(200).send("Oi, seu server está funcionando!");
-  } catch (error) {
-      res.status(400).send("ERRO");
   }
 });
