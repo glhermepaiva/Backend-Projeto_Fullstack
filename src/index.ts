@@ -23,12 +23,3 @@ const server = app.listen(process.env.PORT, () => {
       console.error(`Failure upon starting server.`);
   }
 });
-
-app.get("/teste", async (req: Request, res: Response) => {
-
-  try {
-      res.status(200).send("Oi, seu server está funcionando!");
-  } catch (error) {
-      res.status(400).send("ERRO");
-  }
-});
