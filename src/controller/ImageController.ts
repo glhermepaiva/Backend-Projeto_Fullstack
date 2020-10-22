@@ -63,6 +63,7 @@ export class ImageController {
       const details = await imageBusiness.getImageDetails(token, id)
 
       res.status(200).send({details})
+      res.header("Access-Control-Allow-Origin", "*")
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {
