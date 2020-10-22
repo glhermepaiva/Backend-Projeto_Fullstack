@@ -62,20 +62,7 @@ export class ImageController {
       const imageBusiness = new ImageBusiness()
       const details = await imageBusiness.getImageDetails(token, id)
 
-      res.header('Access-Control-Allow-Origin', '*')
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-      res.status(200).send({
-        image: details.map((info: any) => {
-          return {
-            subtitle: info.subtitle,
-            author: info.author,
-            date: info.date,
-            file: info.file,
-            tags: info.tags,
-            collection: info.collection
-          }
-        })
-      })
+      res.status(200).send({details})
     } catch (error) {
       res.status(400).send({error: error.message})
     } finally {

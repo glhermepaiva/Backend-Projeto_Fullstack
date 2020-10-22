@@ -39,9 +39,9 @@ export class ImageDatabase extends BaseDatabase {
     const result = await this.getConnection()
     .raw(`
           SELECT * FROM ${ImageDatabase.TABLE_NAME}
-          WHERE ID = "${id}"
+          WHERE id = "${id}"
     `)
-    return result[0]
+    return result[0][0]
   }
 
   public async addProfileImage(
