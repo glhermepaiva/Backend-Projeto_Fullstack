@@ -68,4 +68,13 @@ export class ImageDatabase extends BaseDatabase {
          WHERE user_id = "${userId}"
     `)
   }
+
+  public async getImageDetails(id: string): Promise<any> {
+    const result = await this.getConnection()
+    .raw(`
+          SELECT * FROM ${ImageDatabase.TABLE_NAME}
+          WHERE ID = "${id}"
+    `)
+    return result[0][0]
+  }
 }
