@@ -20,8 +20,6 @@ export class UserController {
       res.status(200).send({token, infos})
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 
@@ -43,8 +41,6 @@ export class UserController {
         res.status(400).send({message: "Por favor confira se seu email ou nome de usuário estão corretos"})
     }
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 }

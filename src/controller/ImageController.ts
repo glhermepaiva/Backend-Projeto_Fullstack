@@ -22,8 +22,6 @@ export class ImageController {
       res.status(200).send({message: `Imagem cadastrada com sucesso!`})
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 
@@ -49,8 +47,6 @@ export class ImageController {
       })
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 
@@ -91,8 +87,6 @@ export class ImageController {
       res.status(200).send({message: `Imagem de perfil atualizada com sucesso!`})
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 
@@ -107,8 +101,6 @@ export class ImageController {
       res.status(200).send({profilePicture})
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 }
