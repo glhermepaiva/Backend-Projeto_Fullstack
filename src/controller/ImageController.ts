@@ -62,8 +62,6 @@ export class ImageController {
       const imageBusiness = new ImageBusiness()
       const details = await imageBusiness.getImageDetails(token, id)
 
-      console.log(details)
-
       res.status(200).send({
         image: details.map((info: any) => {
           return {
