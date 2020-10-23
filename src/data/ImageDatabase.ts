@@ -75,6 +75,6 @@ export class ImageDatabase extends BaseDatabase {
           SELECT * FROM ${ImageDatabase.TABLE_NAME}
           WHERE ID = "${id}"
     `)
-    return result[0][0]
+    return result[0]
   }
 }
