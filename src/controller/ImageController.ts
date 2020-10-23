@@ -76,8 +76,6 @@ export class ImageController {
       })
     } catch (error) {
       res.status(400).send({error: error.message})
-    } finally {
-      BaseDatabase.destroyConnection()
     }
   }
 
