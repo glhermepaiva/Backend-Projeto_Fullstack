@@ -54,6 +54,31 @@ export class ImageController {
     }
   }
 
+  async imageDetails(req: Request, res: Response) {
+    try {
+      const token = req.headers.authorization as string
+      const id = req.params.id
+
+      const imageBusiness = new ImageBusiness()
+      const details = await imageBusiness.getImageDetails(token, id)
+
+      res.status(200).send({
+        image: details.map((info: any) => {
+          return {
+            subtitle: info.subtitle,
+            author: info.author,
+            date: info.date,
+            file: info.file,
+            tags: info.tags,
+            collection: info.collection
+          }
+        })
+      })
+    } catch (error) {
+      res.status(400).send({error: error.message})
+    }
+  }
+
   async addProfilePicture(req: Request, res: Response) {
     try {
       const file = req.body.file as string
