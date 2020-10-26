@@ -19,6 +19,14 @@ export class UserController {
 
       res.status(200).send({token, infos})
     } catch (error) {
+      if(error.message.includes("key 'username")){
+        res.status(400).send({message: "Esse nome de usuário já está em uso, por favor digite outro e tente novamente"})
+      }
+      
+      if(error.message.includes("key 'email")){
+        res.status(400).send({message: "Esse email já está em uso, por favor digite outro e tente novamente"})
+      }
+
       res.status(400).send({error: error.message})
     }
   }
