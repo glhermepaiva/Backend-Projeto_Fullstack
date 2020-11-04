@@ -11,6 +11,9 @@ A comunicação do front com o back-end é feita através de requisições do Ax
 ## Instruções para rodar
 Acessar o site https://flickenu.surge.sh/ e criar um novo usuário.
 
+## Link para parte Frontend do projeto
+https://github.com/glhermepaiva/Frontend-Projeto_Fullstack
+
 ## Contato
 Guilherme Paiva
 https://www.linkedin.com/in/glhrmpaiva
